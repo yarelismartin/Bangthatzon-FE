@@ -8,7 +8,7 @@ import ProductCard from '../components/ProductCard';
 function Home() {
   const { user } = useAuth();
   const [authUser, setAuthUser] = useState();
-  const [products, setProducts] = useState();
+  const [products, setProducts] = useState([]);
 
   const handleUpdate = () => {
     checkUser(user.uid).then((data) => setAuthUser(data));
