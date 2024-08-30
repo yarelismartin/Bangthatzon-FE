@@ -8,7 +8,9 @@ export default function ProductCard({ productObj }) {
       <Card style={{ width: '18rem' }}>
         <Card.Img variant="top" src={productObj.image} />
         <Card.Body>
-          <Card.Title>{productObj.productName}</Card.Title>
+          <a href={`/product/${productObj.id}`}>
+            <Card.Title>{productObj.productName}</Card.Title>
+          </a>
           <Card.Text>
             $ {productObj.price}
           </Card.Text>
@@ -20,6 +22,7 @@ export default function ProductCard({ productObj }) {
 
 ProductCard.propTypes = {
   productObj: PropTypes.shape({
+    id: PropTypes.string,
     image: PropTypes.string,
     productName: PropTypes.string,
     price: PropTypes.number,
