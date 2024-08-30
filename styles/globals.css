@@ -1,11 +1,27 @@
 @import 'bootstrap/dist/css/bootstrap.css';
 
-html,
-body {
+* {
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+html {
+  font-size: 80%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #88effd;
+}
+
+
+.container {
+  margin: 0 auto;
+  /* max-width: 107rem; */
+  padding: 0 4rem;
 }
 
 a {
@@ -13,10 +29,14 @@ a {
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
+.flex {
+  display: flex;
 }
 
-body {
-  background-color: #88effd;
+/* INDEX START */
+
+.home-product-container{
+ flex-wrap: wrap;
+ gap: 10px;
+ justify-content: center;
 }
