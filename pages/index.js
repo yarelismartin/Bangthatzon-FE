@@ -22,7 +22,6 @@ function Home() {
     checkUser(user.uid).then((data) => setAuthUser(data[0]));
     getNewProducts();
   }, [user.uid]);
-  console.warn(authUser, 'auth');
 
   return (
     <>
@@ -35,7 +34,7 @@ function Home() {
           <div className="home-product-container flex">
             {
               products?.map((product) => (
-                <ProductCard productObj={product} />
+                <ProductCard productObj={product} key={product.id} />
               ))
             }
           </div>
