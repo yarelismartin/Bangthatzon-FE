@@ -22,7 +22,7 @@ export default function ProductDetail({ productObj }) {
             }}
           />
           <p>Seller</p>
-          <h4>{`${productObj.seller?.firstName} ${productObj.seller?.lastName}`}</h4>
+          <h4><a href={`/products/sellers/${productObj.sellerId}`}>{`${productObj.seller?.firstName} ${productObj.seller?.lastName}`}</a></h4>
         </div>
         <h2>{productObj.productName}</h2>
         <p>{productObj.description}</p>
@@ -45,7 +45,8 @@ ProductDetail.propTypes = {
     productName: PropTypes.string,
     description: PropTypes.string,
     price: PropTypes.number,
-    quantityAvailable: PropTypes.string,
+    quantityAvailable: PropTypes.number,
+    sellerId: PropTypes.number,
     seller: PropTypes.shape({
       image: PropTypes.string,
       firstName: PropTypes.string,
