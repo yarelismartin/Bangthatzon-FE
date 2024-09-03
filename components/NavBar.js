@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import {
   Navbar, //
@@ -8,8 +8,25 @@ import {
   Button,
 } from 'react-bootstrap';
 import { signOut } from '../utils/auth';
+import { useAuth } from '../utils/context/authContext';
+import { getSingleUser } from '../api/UserData';
 
 export default function NavBar() {
+  const [userId, setUserId] = useState(null);
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (user.uid) {
+      getSingleUser(user.uid)
+        .then((u) => {
+          setUserId(u.id);
+        })
+        .catch((error) => {
+          console.error('User not found', error);
+        });
+    }
+  }, [user]);
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -23,8 +40,8 @@ export default function NavBar() {
             <Link passHref href="/">
               <Nav.Link>Home</Nav.Link>
             </Link>
-            <Link passHref href="/delete-me">
-              <Nav.Link>Delete Me</Nav.Link>
+            <Link passHref href={`/users/${userId}/orders?status=open`}>
+              <Nav.Link>My Cart</Nav.Link>
             </Link>
             <Button variant="danger" onClick={signOut}>
               Sign Out
