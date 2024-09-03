@@ -1,12 +1,20 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 import { getOrderInCart } from '../../../api/OrderData';
+import { removeProductFromCart } from '../../../api/ProductData';
 
 export default function ViewCart() {
   const router = useRouter();
   const { userId, status } = router.query;
   const [order, setOrder] = useState();
+
+  const handleClick = (productId) => {
+    removeProductFromCart(order.id, productId).then(() => {
+      getOrderInCart(userId, status).then(setOrder);
+    });
+  };
 
   useEffect(() => {
     if (userId && status) {
@@ -14,8 +22,6 @@ export default function ViewCart() {
       getOrderInCart(userId, status).then(setOrder);
     }
   }, [userId, status]);
-
-  console.warn('order', order);
 
   return (
     <div>
@@ -29,9 +35,11 @@ export default function ViewCart() {
               </p>
               <Card.Title>{p.productName}</Card.Title>
               <p>$ {p.price}</p>
+              <Button variant="danger" onClick={() => handleClick(p.id)}>Remove</Button>
             </Card.Body>
           </Card>
         )))}
+      <h2>Total: ${order?.totalPrice}</h2>
     </div>
   );
 }

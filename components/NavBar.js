@@ -20,9 +20,6 @@ export default function NavBar() {
       getSingleUser(user.uid)
         .then((u) => {
           setUserId(u.id);
-        })
-        .catch((error) => {
-          console.error('User not found', error);
         });
     }
   }, [user]);
