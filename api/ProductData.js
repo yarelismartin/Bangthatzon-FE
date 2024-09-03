@@ -64,7 +64,7 @@ const getSellersProducts = (sellerId) => new Promise((resolve, reject) => {
 
 const addProductToCart = (productId, userId) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/api/products/${productId}/addProduct`, {
-    method: 'GET',
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -75,12 +75,13 @@ const addProductToCart = (productId, userId) => new Promise((resolve, reject) =>
     .catch(reject);
 });
 
-const removeProductFromCart = (orderId) => new Promise((resolve, reject) => {
+const removeProductFromCart = (orderId, productId) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/api/orders/${orderId}/removeProduct`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     },
+    body: JSON.stringify(productId),
   }).then((response) => response.text())
     .then((data) => resolve(data))
     .catch((error) => reject(error));
