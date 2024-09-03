@@ -37,6 +37,9 @@ export default function NavBar() {
             <Link passHref href="/">
               <Nav.Link>Home</Nav.Link>
             </Link>
+            <Link passHref href={`/users/${userId}/order_history`}>
+              <Nav.Link>Order History</Nav.Link>
+            </Link>
             <Link passHref href={`/users/${userId}/orders?status=open`}>
               <Nav.Link>My Cart</Nav.Link>
             </Link>

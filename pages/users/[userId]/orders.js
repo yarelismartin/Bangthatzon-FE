@@ -40,6 +40,7 @@ export default function ViewCart() {
           </Card>
         )))}
       <h2>Total: ${order?.totalPrice}</h2>
+      <Button onClick={() => router.push(`/users/${userId}/${order.id}/checkout`)}>Checkout</Button>
     </div>
   );
 }
