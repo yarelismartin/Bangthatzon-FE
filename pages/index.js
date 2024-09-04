@@ -7,25 +7,39 @@ import ProductCard from '../components/ProductCard';
 
 function Home() {
   const { user } = useAuth();
-  const [authUser, setAuthUser] = useState();
+  const [authUser, setAuthUser] = useState(null);
   const [products, setProducts] = useState([]);
 
-  const handleUpdate = () => {
-    checkUser(user.uid).then((data) => setAuthUser(data));
-  };
+  // const handleUpdate = () => {
+  //   checkUser(user.uid).then((data) => setAuthUser(data));
+  // };
 
   const getNewProducts = () => {
     getRecentProducts().then(setProducts);
   };
 
+  const handleUpdate = () => {
+    checkUser(user.uid).then((data) => {
+      console.warn('User data:', data); // Debugging log
+      setAuthUser(data[0]);
+      getNewProducts();
+    });
+  };
   useEffect(() => {
-    checkUser(user.uid).then((data) => setAuthUser(data[0]));
+    checkUser(user.uid).then((data) => {
+      console.warn('User data after update:', data);
+      if (data.length > 0) {
+        setAuthUser(data[0]);
+      } else {
+        console.warn('No user data found'); // Debugging log
+      }
+    });
     getNewProducts();
   }, [user.uid]);
 
   return (
     <>
-      {authUser ? (
+      {authUser?.uid === user?.uid ? (
         <div
           className="text-center d-flex flex-column justify-content-center align-content-center container"
 
@@ -39,7 +53,7 @@ function Home() {
             }
           </div>
         </div>
-      ) : (<RegisterForm user={user} updateUser={handleUpdate} />)}
+      ) : (<RegisterForm onUpdate={handleUpdate} />)}
     </>
   );
 }

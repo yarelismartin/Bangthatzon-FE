@@ -14,17 +14,17 @@ const getSingleUser = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const updateUser = (userId, playlistDetails) => new Promise((resolve, reject) => {
+const updateSingleUser = (userId, userDetail) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/api/users/${userId}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(playlistDetails),
+    body: JSON.stringify(userDetail),
   })
     .then((response) => response.json())
     .then((data) => resolve(data))
     .catch(reject);
 });
 
-export { getSingleUser, updateUser };
+export { getSingleUser, updateSingleUser };

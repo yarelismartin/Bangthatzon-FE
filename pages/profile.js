@@ -15,7 +15,7 @@ export default function Profile() {
 
   useEffect(() => {
     getUser();
-  });
+  }, [user.uid]);
 
   return (
     <div>
@@ -54,7 +54,7 @@ export default function Profile() {
           <ListGroup.Item>Account</ListGroup.Item>
         </ListGroup>
         <Card.Body>
-          <Card.Link href="#">Edit Account</Card.Link>
+          <Card.Link href={`/profile/edit/${userInfo?.id}`}>Edit Account</Card.Link>
           <Card.Link href="#" onClick={signOut}>Logout</Card.Link>
         </Card.Body>
       </Card>
