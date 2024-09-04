@@ -22,7 +22,6 @@ const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) 
       </>
     );
   }
-
   return <Signin />;
 };
 
