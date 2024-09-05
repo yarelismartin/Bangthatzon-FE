@@ -20,18 +20,14 @@ function Home() {
 
   const handleUpdate = () => {
     checkUser(user.uid).then((data) => {
-      console.warn('User data:', data); // Debugging log
       setAuthUser(data[0]);
       getNewProducts();
     });
   };
   useEffect(() => {
     checkUser(user.uid).then((data) => {
-      console.warn('User data after update:', data);
       if (data.length > 0) {
         setAuthUser(data[0]);
-      } else {
-        console.warn('No user data found'); // Debugging log
       }
     });
     getNewProducts();
@@ -44,13 +40,14 @@ function Home() {
           className="text-center d-flex flex-column justify-content-center align-content-center container"
 
         >
-          <h1>Newest Items</h1>
+          <h1>New Arrivals</h1>
           <div className="home-product-container flex">
-            {
+            {products.length <= 0 ? (<p>No Products Available</p>) : (
               products?.map((product) => (
                 <ProductCard productObj={product} key={product.id} />
               ))
-            }
+            )}
+
           </div>
         </div>
       ) : (<RegisterForm onUpdate={handleUpdate} />)}

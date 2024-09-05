@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { getSellersProducts } from '../../../api/ProductData';
@@ -15,13 +16,18 @@ export default function SellersProducts() {
 
   useEffect(() => {
     SellerProducts();
+    console.warn(sellerProducts);
   }, [SellerProducts]);
 
   return (
     <div>
-      {sellerProducts.products?.map((product) => (
+
+      {sellerProducts.length <= 0 ? (
+        <p>No Products Available</p>
+      ) : (sellerProducts.products?.map((product) => (
         <ProductCard productObj={product} key={product.id} />
-      ))}
+      ))) }
+
     </div>
   );
 }

@@ -18,8 +18,6 @@ export default function OrderHistory() {
     getOrders();
   }, [userId]);
 
-  console.warn(orders);
-
   return (
     <div>
       {orders.map((order) => {

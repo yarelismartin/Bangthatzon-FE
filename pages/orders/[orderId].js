@@ -8,13 +8,23 @@ export default function OrderDetail() {
   const router = useRouter();
   const { orderId } = router.query;
 
-  const getOrderDeatil = () => {
-    getOrderSummary(orderId).then(setOrder);
-  };
-
   useEffect(() => {
+    let isMounted = true; // Add this variable to track component mount status
+
+    const getOrderDeatil = () => {
+      getOrderSummary(orderId).then((orderData) => {
+        if (isMounted) { // Only update state if component is still mounted
+          setOrder(orderData);
+        }
+      });
+    };
+
     getOrderDeatil();
-  });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [orderId]);
 
   const formattedDate = new Date(order.purchaseDate).toLocaleDateString();
 
