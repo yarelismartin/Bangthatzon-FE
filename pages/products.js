@@ -15,7 +15,7 @@ export default function Products() {
 
   const handleCategoryClick = (id, name) => {
     getProductsInCategory(id).then(setProducts);
-    setActiveFilter(`Category: ${name}`);
+    setActiveFilter(`Results for: ${name}`);
   };
 
   const getCategories = () => {
@@ -41,7 +41,7 @@ export default function Products() {
           </div>
         ))}
       </DropdownButton>
-      <h2>Results for {activeFilter}</h2>
+      <h2>{activeFilter}</h2>
       { products.length <= 0 ? (
         <p>No Products Available</p>
       ) : (

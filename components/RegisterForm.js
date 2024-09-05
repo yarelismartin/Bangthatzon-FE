@@ -52,7 +52,6 @@ export default function RegisterForm({ onUpdate, profileObj }) {
   };
 
   useEffect(() => {
-    console.warn('Profile:', profileObj);
     if (profileObj?.id) {
       setFormData(profileObj);
     }

@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import Link from 'next/link';
 import { getOrderInCart } from '../../../api/OrderData';
 import { removeProductFromCart } from '../../../api/ProductData';
 
@@ -25,22 +26,33 @@ export default function ViewCart() {
 
   return (
     <div>
-      {order?.products?.length <= 0 ? <h1>You have no Products in your cart</h1>
-        : (order?.products?.map((p) => (
-          <Card style={{ width: '18rem' }} key={p.id}>
-            <Card.Img variant="top" src={p.image} />
-            <Card.Body>
-              <p>
-                Seller: {p.seller?.firstName} {p.seller?.lastName}
-              </p>
-              <Card.Title>{p.productName}</Card.Title>
-              <p>$ {p.price}</p>
-              <Button variant="danger" onClick={() => handleClick(p.id)}>Remove</Button>
-            </Card.Body>
-          </Card>
-        )))}
-      <h2>Total: ${order?.totalPrice}</h2>
-      <Button onClick={() => router.push(`/users/${userId}/${order.id}/checkout`)}>Checkout</Button>
+      {order?.products?.length <= 0 ? (
+        <><h1>Your Cart is empty! Let&apos;s fix that!</h1>
+          <Link href="/products" passHref>
+            <p style={{ textDecoration: 'underline', cursor: 'pointer' }}>Start Shopping</p>
+          </Link>
+        </>
+      )
+        : (
+          <>
+            {order?.products?.map((p) => (
+              <Card style={{ width: '18rem' }} key={p.id}>
+                <Card.Img variant="top" src={p.image} />
+                <Card.Body>
+                  <p>
+                    Seller: {p.seller?.firstName} {p.seller?.lastName}
+                  </p>
+                  <Card.Title>{p.productName}</Card.Title>
+                  <p>$ {p.price}</p>
+                  <Button variant="danger" onClick={() => handleClick(p.id)}>Remove</Button>
+                </Card.Body>
+              </Card>
+            ))}
+            <h2>Total: ${order?.totalPrice}</h2>
+            <Button onClick={() => router.push(`/users/${userId}/${order.id}/checkout`)}>Checkout</Button>
+          </>
+        )}
+
     </div>
   );
 }

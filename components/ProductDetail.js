@@ -61,7 +61,7 @@ export default function ProductDetail({ productObj }) {
         <p>{productObj.quantityAvailable}</p>
         <p>Category</p>
         <p>{productObj.category?.categoryName}</p>
-        <Button onClick={handleClick}>Add to Cart</Button>
+        {productObj.quantityAvailable <= 0 ? <Button>Out of Stock</Button> : <Button onClick={handleClick}>Add to Cart</Button>}
       </div>
 
     </div>
