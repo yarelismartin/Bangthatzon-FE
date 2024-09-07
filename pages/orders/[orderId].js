@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Button, Card } from 'react-bootstrap';
 import { getOrderSummary } from '../../api/OrderData';
-import { addProductToCart } from '../../api/ProductData';
 import { getSingleUser } from '../../api/UserData';
 import { useAuth } from '../../utils/context/authContext';
 
@@ -14,17 +13,6 @@ export default function OrderDetail() {
   const router = useRouter();
   const { orderId } = router.query;
   const { user } = useAuth();
-
-  const handleClick = async (id) => {
-    if (order.userId) {
-      const response = await addProductToCart(id, order.userId);
-      if (response.message === 'Item is already in your cart') {
-        alert('Item is already in your cart');
-      } else {
-        router.push(`/users/${order.userId}/orders?status=open`);
-      }
-    }
-  };
 
   useEffect(() => {
     let isMounted = true; // Add this variable to track component mount status
@@ -52,8 +40,8 @@ export default function OrderDetail() {
   const formattedDate = new Date(order.purchaseDate).toLocaleDateString();
 
   return (
-    <div className="w-full md:w-3/4 lg:w-2/3 mx-auto mb-5 mt-3">
-      <Card key={order.id}>
+    <div className="w-full md:w-3/4 lg:w-2/3 mx-auto mb-5 mt-3" key={order.id}>
+      <Card className="mb-4">
         <div>
           <Card.Header as="h5" className="d-flex">
             <div className="text-left mr-auto">
@@ -91,8 +79,7 @@ export default function OrderDetail() {
                 <h2 className="card-title">{p.productName}</h2>
                 <p>${p.price}</p>
                 <div className="card-actions justify-end">
-                  <button type="button" className="btn btn-primary" onClick={() => router.push(`/products/${p.id}`)}>View</button>
-                  <button type="button" className="btn btn-primary" onClick={() => handleClick(p.id)}>Buy Again</button>
+                  <button type="button" className="btn btn-primary" onClick={() => router.push(`/products/${p.id}`)}>View Product</button>
                 </div>
               </div>
             </div>
