@@ -21,7 +21,7 @@ export default function Complete() {
   const formattedDate = new Date(order.purchaseDate).toLocaleDateString();
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100" key={order.id}>
       {/* Main Card */}
       <div className="w-[60%] bg-white p-10 rounded-lg shadow-lg mt-[20px] mb-[20px]">
         {/* Title Section */}
@@ -54,7 +54,7 @@ export default function Complete() {
         {/* Order Items */}
         <div className="border-t border-gray-300 pt-6 mt-2">
           {order.products?.map((p) => (
-            <div className="flex items-center mb-4">
+            <div className="flex items-center mb-4" key={p.id}>
               <img
                 src={p.image} // Replace with actual image path
                 alt="Item"
