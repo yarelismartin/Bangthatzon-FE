@@ -6,16 +6,20 @@ import getAllCategories from '../api/CategoryData';
 
 export default function Products() {
   const [products, setProducts] = useState([]);
-  const [activeFilter, setActiveFilter] = useState('');
   const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('Search by Category');
 
   const getAllProducts = () => {
     getProducts().then(setProducts);
   };
 
   const handleCategoryClick = (id, name) => {
-    getProductsInCategory(id).then(setProducts);
-    setActiveFilter(`Category: ${name}`);
+    if (id) {
+      getProductsInCategory(id).then(setProducts);
+    } else {
+      getAllProducts();
+    }
+    setSelectedCategory(name);
   };
 
   const getCategories = () => {
@@ -28,27 +32,28 @@ export default function Products() {
   }, []);
 
   return (
-    <div>
+    <div className="text-center align-content-center container mt-5">
       <DropdownButton
         align="end"
         id="dropdown-item-button"
-        title="Search by Category"
+        title={selectedCategory}
         className="drop-down-filter"
       >
+        <Dropdown.Item as="button" onClick={() => handleCategoryClick(null, 'All Products')}>
+          All Products
+        </Dropdown.Item>
         {categories.map((category) => (
           <div key={category.id}>
             <Dropdown.Item as="button" onClick={() => handleCategoryClick(category.id, category.categoryName)}>{category.categoryName}</Dropdown.Item>
           </div>
         ))}
       </DropdownButton>
-      <h2>Results for {activeFilter}</h2>
-      { products.length <= 0 ? (
-        <p>No Products Available</p>
-      ) : (
-        products.map((p) => (
-          <ProductCard productObj={p} key={p.id} />
-        ))
-      )}
+      <div className="home-product-container flex">{
+          products.map((p) => (
+            <ProductCard productObj={p} key={p.id} />
+          ))
+        }
+      </div>
     </div>
   );
 }

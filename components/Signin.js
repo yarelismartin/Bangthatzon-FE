@@ -5,21 +5,18 @@ import { signIn } from '../utils/auth';
 function Signin() {
   return (
     <div
-      className="text-center d-flex flex-column justify-content-center align-content-center"
+      className="d-flex flex-column justify-content-center align-items-center text-center"
       style={{
-        height: '90vh',
+        height: '90vh', // Adjust height to ensure it takes up most of the viewport
         padding: '30px',
         margin: '0 auto',
-        zIndex: 1,
-        minHeight: '25rem',
         width: '100%',
-        minWidth: '30rem',
-        paddingBlock: '0 5rem',
+        maxWidth: '400px', // Ensure it's not too wide on large screens
       }}
     >
       <h1>Hi there!</h1>
       <p>Click the button below to login!</p>
-      <Button type="button" size="lg" className="copy-btn" onClick={signIn}>
+      <Button type="button" size="lg" className="w-75" onClick={signIn}>
         Sign In
       </Button>
     </div>

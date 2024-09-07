@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from 'react';
 import { checkUser } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
@@ -20,18 +21,14 @@ function Home() {
 
   const handleUpdate = () => {
     checkUser(user.uid).then((data) => {
-      console.warn('User data:', data); // Debugging log
       setAuthUser(data[0]);
       getNewProducts();
     });
   };
   useEffect(() => {
     checkUser(user.uid).then((data) => {
-      console.warn('User data after update:', data);
       if (data.length > 0) {
         setAuthUser(data[0]);
-      } else {
-        console.warn('No user data found'); // Debugging log
       }
     });
     getNewProducts();
@@ -41,16 +38,19 @@ function Home() {
     <>
       {authUser?.uid === user?.uid ? (
         <div
-          className="text-center d-flex flex-column justify-content-center align-content-center container"
+          className="text-center d-flex flex-column justify-content-center align-content-center container mt-5"
 
         >
-          <h1>Newest Items</h1>
+          <img alt="banner" src="/Beige Gray Aesthetic Photo Collage Shop New Collection Promotion Banner.jpg" />
           <div className="home-product-container flex">
-            {
+            {products.length <= 0 ? (<p>No Products Available</p>) : (
               products?.map((product) => (
-                <ProductCard productObj={product} key={product.id} />
+                <>
+                  <ProductCard productObj={product} key={product.id} />
+                </>
               ))
-            }
+            )}
+
           </div>
         </div>
       ) : (<RegisterForm onUpdate={handleUpdate} />)}
