@@ -37,23 +37,27 @@ export default function Checkout() {
   }, [userId]);
 
   return (
-    <div>
-      <h3>Select a Payment Method</h3>
-      <p>CARD NUMBER</p>
-      <Form onSubmit={handleSubmit}>
-        <Form.Select
-          name="paymentTypeId"
-          onChange={handleChange}
-          value={formInput.paymentTypeId}
-          required
-        >
-          <option value="">Select a Payment</option>
-          { payments.map((p) => (
-            <option value={p.id} key={p.id}>{p.cardNumber}</option>
-          ))}
-        </Form.Select>
-        <Button type="submit">Place Order</Button>
-      </Form>
+    <div className="flex items-center justify-center">
+      <div className="w-[70%] max-w-md p-4 shadow-md rounded-md mt-[100px] bg-gray-100">
+        <h3 className="text-center mb-4">Select a Payment Method</h3>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3">
+            <Form.Label>CARD NUMBER</Form.Label>
+            <Form.Select
+              name="paymentTypeId"
+              onChange={handleChange}
+              value={formInput.paymentTypeId}
+              required
+            >
+              <option value="">Select a Payment</option>
+              {payments.map((p) => (
+                <option value={p.id} key={p.id}>{p.cardNumber}</option>
+              ))}
+            </Form.Select>
+          </Form.Group>
+          <Button type="submit" className="w-full">Place Order</Button>
+        </Form>
+      </div>
     </div>
   );
 }

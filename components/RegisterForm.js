@@ -58,7 +58,7 @@ export default function RegisterForm({ onUpdate, profileObj }) {
   }, [profileObj, user.fbUser.uid]);
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} className="mt-10">
       <Row className="mb-3">
         <Form.Group as={Col} controlId="formGridfirstname">
           <Form.Label>First Name</Form.Label>

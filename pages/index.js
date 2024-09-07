@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from 'react';
 import { checkUser } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
@@ -37,14 +38,16 @@ function Home() {
     <>
       {authUser?.uid === user?.uid ? (
         <div
-          className="text-center d-flex flex-column justify-content-center align-content-center container"
+          className="text-center d-flex flex-column justify-content-center align-content-center container mt-5"
 
         >
-          <h1>New Arrivals</h1>
+          <img alt="banner" src="/Beige Gray Aesthetic Photo Collage Shop New Collection Promotion Banner.jpg" />
           <div className="home-product-container flex">
             {products.length <= 0 ? (<p>No Products Available</p>) : (
               products?.map((product) => (
-                <ProductCard productObj={product} key={product.id} />
+                <>
+                  <ProductCard productObj={product} key={product.id} />
+                </>
               ))
             )}
 

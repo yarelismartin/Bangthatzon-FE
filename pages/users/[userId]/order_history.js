@@ -19,18 +19,18 @@ export default function OrderHistory() {
   }, [userId]);
 
   return (
-    <div>
+    <div className="flex mt-[20px] flex-col gap-4">
       {orders.map((order) => {
         const formattedDate = new Date(order.purchaseDate).toLocaleDateString();
         return (
 
-          <Card key={order.id}>
+          <Card key={order.id} className="w-[70%]">
             <Card.Header as="h5">Order # {order.id}</Card.Header>
             <Card.Body>
               <Card.Title>Placed on: {formattedDate}</Card.Title>
-              <Card.Text>
+              <Card.Title>
                 Total: ${order.totalPrice}
-              </Card.Text>
+              </Card.Title>
               <Button variant="primary" onClick={() => router.push(`/orders/${order.id}`)}>Order Deatil</Button>
             </Card.Body>
           </Card>
