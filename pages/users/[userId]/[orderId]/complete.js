@@ -23,7 +23,7 @@ export default function Complete() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       {/* Main Card */}
-      <div className="w-[60%] bg-white p-10 rounded-lg shadow-lg">
+      <div className="w-[60%] bg-white p-10 rounded-lg shadow-lg mt-[20px] mb-[20px]">
         {/* Title Section */}
         <h1 className="text-2xl font-bold mb-6 text-gray-800 text-center">Thank You For Your Order!</h1>
         <p className="text-gray-600 text-center mb-6">
@@ -48,7 +48,7 @@ export default function Complete() {
             <span className="font-semibold text-gray-700">Order Status:</span>
             <span className="text-gray-700">Received</span>
           </div>
-          <h3 className="text-lg font-semibold text-gray-700 mt-4">{order.products.length} Item(s)</h3>
+          <h3 className="text-lg font-semibold text-gray-700 mt-4">{order.products?.length} Item(s)</h3>
         </div>
 
         {/* Order Items */}

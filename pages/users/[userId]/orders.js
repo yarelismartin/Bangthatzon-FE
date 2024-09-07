@@ -69,7 +69,13 @@ export default function ViewCart() {
               ))}
 
               <h2 className="font-semibold ml-auto mt-[10px] mb-[10px]">Total: ${order?.totalPrice}</h2>
-              <Button onClick={() => router.push(`/users/${userId}/${order.id}/checkout`)} style={{ backgroundColor: 'black', border: 'none', color: 'white' }}>Checkout</Button>
+              <Button
+                onClick={() => router.push(`/users/${userId}/${order.id}/checkout`)}
+                style={{
+                  backgroundColor: 'black', border: 'none', color: 'white', marginBottom: '20px',
+                }}
+              >Checkout
+              </Button>
             </div>
           </>
         )}
