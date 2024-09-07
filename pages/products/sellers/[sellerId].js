@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import React, { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
@@ -16,7 +17,7 @@ export default function SellersProducts() {
 
   useEffect(() => {
     SellerProducts();
-  }, [SellerProducts]);
+  }, [sellerId]);
 
   return (
     <div>
